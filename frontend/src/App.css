@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+}
+
+header ul {
+  width: 40%;
+  height: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+header ul li {
+  list-style: none;
+  cursor: pointer;
+}
+
+li a {
+  color: black;
+  transition: all 0.3s;
+  padding: 2px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  
+}
+
+li a:hover {
+  color: #fcdb03;
+}
+
+li .login {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+header h2 {
+  margin-left: 1rem;
+}
+
+section {
+  height: 55vh;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.recipe-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.recipe-img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: -4rem;
+}
+
+.recipe-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  margin-left: 6rem;
+  
+}
+
+.recipe-content .left,
+.recipe-content .right {
+  flex: 1;
+  min-width: 400px;
+  text-align: left;
+   margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.recipe-content .left h2,
+.recipe-content .right h2 {
+  margin-bottom: 1rem;
+}
+
+.recipe-content .left p {
+  line-height: 1.6;
+}
+
+
+.home {
+  display: flex;
+  margin-top: 6rem;
+  gap: 2rem;
+  position: relative;
+}
+
+.home .left h1 {
+  margin-bottom: 1rem;
+}
+
+.home button {
+  color: white;
+  border: none;
+  background-color: #d35400;
+  width: 200px;
+  padding: 10px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.home a:hover {
+  color: white;
+  background-color: #2c4860;
+}
+
+.home .left h5 {
+  margin: 2rem 0;
+}
+
+.bg svg {
+  position: absolute;
+  bottom: 0;
+}
+
+.card-container {
+  width: 75%;
+  margin: auto;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, 13rem);
+  cursor: pointer;
+}
+
+.card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.card-body {
+  background-color: #fcdb03;
+  padding: 1rem;
+}
+
+.card-body .title {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card-body .icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body .timer {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.action {
+  display: flex;
+  font-size: 19px;
+  justify-content: space-between;
+  align-items: center;
+  width: 45px;
+}
+
+.editIcon {
+  color: black;
+  font-size: 18px;
+}
+
+.action a:hover {
+  color: black;
+}
+
+.deleteIcon {
+  color: rgb(239, 53, 53);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 34%;
+  z-index: 10;
+  padding: 2rem;
+  border-radius: 6px;
+  border: none;
+  left: 30%;
+  width: 40%;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 9;
+}
+
+.form {
+  width: 71%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-header {
+  background-color: #d4f6e8;
+  height: 3px;
+  text-align: center;
+}
+
+.form-control {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-control .input {
+  flex-basis: 70%;
+  border: 1px solid rgb(156 163 175);
+  border-radius: 4px;
+  height: 30px;
+  padding: 2px;
+}
+
+.form-control .input-textarea {
+  border: 1px solid rgb(156 163 175);
+  border-radius: 4px;
+  flex-basis: 70%;
+  padding: 2px;
+}
+
+.form button {
+  margin: 40px 0;
+  padding: 10px 18px;
+  border: none;
+  background-color: #fcdb03;
+  font-size: 14px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.form p {
+  cursor: pointer;
+  display: inline;
+  border-bottom: 1px solid #307bbd;
+  color: #307bbd;
+  font-size: 14px;
+}
+
+.form .error {
+  color: red;
+  font-size: 13px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.add-recipe {
+  width: 100%;
+  cursor: pointer;
+}
+
+.recipe {
+
+  margin-top: 40rem;
+  padding-bottom: 2rem;
+  cursor: pointer;
+}
+
+.footer {
+  width: 100vw;
+  height: 30px;
+  color: white;
+  background-color: #213547;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 2px;
+  font-size: 14px;
+}
+
+.outer-container {
+  width: 70%;
+  margin: 5rem auto;
+}
+
+.outer-container .profile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.outer-container .title {
+  margin: 1rem 0;
+  text-transform: uppercase;
+}
+
+.outer-container .recipe-details {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+
+
+.active {
+  color: black !important;
+  background-color: #fcdb03;
+}
+
+/* -------------------- Responsive Styling ---------------------- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  header ul {
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  section {
+    width: 95%;
+    padding-top: 5rem;
+  }
+
+  .home {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    width: 95%;
+  }
+
+  .modal {
+    width: 90%;
+    left: 5%;
+    top: 30%;
+  }
+
+  .form {
+    width: 90%;
+  }
+
+  .form-control {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-control .input,
+  .form-control .input-textarea {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .outer-container {
+    width: 90%;
+    margin: 4rem auto;
+  }
+
+  .outer-container .recipe-details,
+  .outer-container .profile {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer {
+    font-size: 12px;
+    height: auto;
+    padding: 5px 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+
+  .modal {
+    width: 70%;
+    left: 15%;
+  }
+
+  .form {
+    width: 80%;
+  }
+
+  .outer-container {
+    width: 80%;
+  }
+}
