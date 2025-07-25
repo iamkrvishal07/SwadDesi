@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Model from "./Model";
-import InputForm from "./inputForm";
+import InputForm from "./InputForm";
 import { NavLink } from "react-router-dom";
 import logo from '../assets/logo.png'
 
