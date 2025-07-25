@@ -54,7 +54,7 @@ const RecipeItems = () => {
   return (
     <div className="card-container">
       {allRecipes?.map((item, index) => (
-        <div key={index} className='card' onDoubleClick={() => navigate(`/recipe/${item._id}`)}>
+        <div key={index} className='card' onClick={() => navigate(`/recipe/${item._id}`)}>
           <img src={item.CoverImage} width="205px" height="200px" alt={item.title} />
           <div className="card-body">
             <div className="title">{item.title}</div>
