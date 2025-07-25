@@ -12,6 +12,10 @@ const PORT = 3000 || process.env.PORT ;
 app.use(express.json()); 
 // app.use(cors())
 
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
+});
+
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
@@ -26,6 +30,5 @@ app.use(express.static("public"))
 
 app.listen(PORT, () => {
     console.log("Server is connected ");
-    console.log(`Server is listening on port http://localhost:${PORT}`);
     dbConnect();
 });
