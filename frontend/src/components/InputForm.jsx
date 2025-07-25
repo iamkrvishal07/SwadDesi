@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const InputForm = ({ setisOpen }) => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const InputForm = ({ setisOpen }) => {
     const urlpoint = isSignUp ? "signUp" : "login";
 
     try {
-      const res = await axios.post(`http://localhost:3000/${urlpoint}`, {
+      const res = await axios.post(`${BASE_URL}/${urlpoint}`, {
         email,
         password,
       });
