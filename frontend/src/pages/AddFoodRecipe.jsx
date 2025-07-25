@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 const AddFoodRecipe = () => {
@@ -16,7 +17,7 @@ const AddFoodRecipe = () => {
         const onHandleSubmit = async (e) => {
             e.preventDefault()
             console.log(recipeData)
-            await axios.post("http://localhost:3000/recipe", recipeData,{
+            await axios.post(`${BASE_URL}/recipe`, recipeData,{
                 headers:{
                     'Content-Type':'multipart/form-data' ,
                     'authorization':'bearer '+localStorage.getItem("token")
