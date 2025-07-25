@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 const RecipeItems = () => {
@@ -23,7 +24,7 @@ const RecipeItems = () => {
     }, [recipes])
 
     const onDelete = async (id) => {
-        await axios.delete(`http://localhost:3000/recipe/${id}`)
+        await axios.delete(`${BASE_URL}/recipe/${id}`)
             .then((res) => console.log(res))
             setAllRecipes(recipes => recipes.filter(recipe => recipe._id !== id))
         let filterItem = favItems.filter(recipe => recipe._id !== id)
