@@ -1,8 +1,8 @@
 const Recipe = require("../models/recipe.model");
 
-// ✅ Import Cloudinary storage
+// Import Cloudinary storage
 const multer = require('multer');
-const { storage } = require('../config/cloudinary');
+const { storage } = require('../config/cloudinary.js');
 const upload = multer({ storage }); 
 
 // GET all recipes
