@@ -21,7 +21,7 @@ const RecipeItems = () => {
 
   const fetchRecipes = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/recipe`);
+      const res = await axios.get("https://swaddesi-backend.onrender.com/recipe");
       setAllRecipes(res.data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
