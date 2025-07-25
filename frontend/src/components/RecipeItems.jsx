@@ -1,75 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLoaderData, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMdStopwatch } from "react-icons/io";
-import { FaHeart } from "react-icons/fa";
-import { FaEdit } from "react-icons/fa";
+import { FaHeart, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-
 const RecipeItems = () => {
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [isFavRecipe, setIsFavRecipe] = useState(false);
+  const navigate = useNavigate();
 
-    const recipes = useLoaderData()
-    const [allRecipes, setAllRecipes] = useState()
-    let favItems = JSON.parse(localStorage.getItem("fav")) ?? []
-    let path = window.location.pathname === "/myRecipe" ? true : false
-    const [isFavRecipe, setIsFavRecipe] = useState(false)
-    const navigate=useNavigate()
-    
-    console.log(allRecipes)
+  let favItems = JSON.parse(localStorage.getItem("fav")) ?? [];
+  const isMyRecipePage = window.location.pathname === "/myRecipe";
 
-    useEffect(() => {
-        setAllRecipes(recipes)
-    }, [recipes])
+  useEffect(() => {
+    fetchRecipes();
+  }, [isFavRecipe]);
 
-    const onDelete = async (id) => {
-        await axios.delete(`${BASE_URL}/recipe/${id}`)
-            .then((res) => console.log(res))
-            setAllRecipes(recipes => recipes.filter(recipe => recipe._id !== id))
-        let filterItem = favItems.filter(recipe => recipe._id !== id)
-        localStorage.setItem("fav", JSON.stringify(filterItem))
+  const fetchRecipes = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/recipe`);
+      setAllRecipes(res.data);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
     }
-    
-    const favRecipe = (item) => {
-        let filterItem = favItems.filter(recipe => recipe._id !== item._id)
-        favItems = favItems.filter(recipe => recipe._id === item._id).length === 0 ? [...favItems, item] : filterItem
-        localStorage.setItem("fav", JSON.stringify(favItems))
-        setIsFavRecipe(pre => !pre)
-    }
+  };
 
+  const onDelete = async (id) => {
+    try {
+      await axios.delete(`${BASE_URL}/recipe/${id}`);
+      setAllRecipes(prev => prev.filter(recipe => recipe._id !== id));
+      const updatedFav = favItems.filter(recipe => recipe._id !== id);
+      localStorage.setItem("fav", JSON.stringify(updatedFav));
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
+  const favRecipe = (item) => {
+    const exists = favItems.some(recipe => recipe._id === item._id);
+    let updatedFav;
+    if (exists) {
+      updatedFav = favItems.filter(recipe => recipe._id !== item._id);
+    } else {
+      updatedFav = [...favItems, item];
+    }
+    localStorage.setItem("fav", JSON.stringify(updatedFav));
+    setIsFavRecipe(prev => !prev); // trigger re-render
+  };
 
   return (
-    <>
-        <div className="card-container">
-            {
-                allRecipes?.map((item,index)=>{
-                    return (
-                        <div key={index} className='card'onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
-                         <img src={item.CoverImage} width="205px" height="200px"></img>
-                        <div className="card-body">
-                            <div className="title">{item.title}</div>
-                            <div className="icons">
-                                <div className='timer'><IoMdStopwatch />45 mins</div>
-                                { (!path) ? <FaHeart onClick={() => favRecipe(item)}
-                                            style={{ color: (favItems.some(res => res._id === item._id)) ? "red" : "" }} /> :
-                                <div className="action">
-                                <Link to={`/editRecipe/${item._id}`} className="editIcon"><FaEdit /></Link>
-                                <MdDelete onClick={() => onDelete(item._id)} className='deleteIcon' />
-                                </div>}
-                                
-                            
-                            </div>
-
-                        </div>
-                    </div>
-                    )
-                })
-            }
+    <div className="card-container">
+      {allRecipes?.map((item, index) => (
+        <div key={index} className='card' onDoubleClick={() => navigate(`/recipe/${item._id}`)}>
+          <img src={item.CoverImage} width="205px" height="200px" alt={item.title} />
+          <div className="card-body">
+            <div className="title">{item.title}</div>
+            <div className="icons">
+              <div className='timer'><IoMdStopwatch />45 mins</div>
+              {!isMyRecipePage ? (
+                <FaHeart
+                  onClick={() => favRecipe(item)}
+                  style={{ color: favItems.some(res => res._id === item._id) ? "red" : "" }}
+                />
+              ) : (
+                <div className="action">
+                  <Link to={`/editRecipe/${item._id}`} className="editIcon"><FaEdit /></Link>
+                  <MdDelete onClick={() => onDelete(item._id)} className='deleteIcon' />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-     
-    </>
-  )
-}
+      ))}
+    </div>
+  );
+};
 
-export default RecipeItems
+export default RecipeItems;
