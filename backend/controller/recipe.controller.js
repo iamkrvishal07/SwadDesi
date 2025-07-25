@@ -11,11 +11,19 @@ const getRecipes = async (req, res) => {
     return res.json(recipes);
 };
 
-//  GET recipe by ID
+// GET recipe by ID
 const getRecipesById = async (req, res) => {
+  try {
     const recipe = await Recipe.findById(req.params.id);
+    if (!recipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
     res.json(recipe);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
 };
+
 
 // ADD new recipe with Cloudinary image
 const addRecipe = async (req, res) => {
