@@ -10,7 +10,7 @@ import RecipeDetails from './pages/RecipeDetails'
 
 const getAllRecipes = async () => {
   try {
-    const res = await axios.get('http://localhost:3000/recipe');
+    const res = await axios.get('https://swaddesi-backend.onrender.com/recipe');
     return res.data;
   } catch (error) {
     console.error("Error fetching recipes:", error);
@@ -33,10 +33,10 @@ const getFavRecipes=()=>{
 
 const getRecipe=async({params})=>{
   let recipe;
-  await axios.get(`http://localhost:3000/recipe/${params.id}`)
+  await axios.get(`https://swaddesi-backend.onrender.com/recipe/${params.id}`)
   .then(res=>recipe=res.data)
 
-  await axios.get(`http://localhost:3000/user/${recipe.createdBy}`)
+  await axios.get(`https://swaddesi-backend.onrender.com/user/${recipe.createdBy}`)
   .then(res=>{
     recipe={...recipe,email:res.data.email}
   })
